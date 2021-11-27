@@ -9,7 +9,7 @@ def pixel_colors_sum(pixel):
     return int(n1) + int(n2) + int(n3)
 
 
-def calculate_average_value(arr, y, x):
+def calculate_average_value(arr, blockSize,y, x):
     result = 0
     count = blockSize * blockSize
     for row in range(y, y + blockSize):
@@ -36,15 +36,19 @@ def transform_image(file_name, gradation, blockSize):
 
     for i in range(0, height, blockSize):
         for j in range(0, width, blockSize):
-            averageValue = calculate_average_value(arr, i, j)
+            averageValue = calculate_average_value(arr, blockSize,i, j)
             set_grey_color(arr, averageValue, blockSize, i, j, step)
 
     return Image.fromarray(arr)
 
 
-file_name = input("Введите имя входного файла ")
-result_name = input("Введите имя выходного файла ")
-gradation = int(input("Введите градацию "))
-blockSize = int(input("Введите размерами мозайки "))
-res = transform_image(file_name, gradation, blockSize)
-res.save(result_name)
+def Main():
+    file_name = input("Введите имя входного файла ")
+    result_name = input("Введите имя выходного файла ")
+    gradation = int(input("Введите градацию "))
+    blockSize = int(input("Введите размерами мозайки "))
+    res = transform_image(file_name, gradation, blockSize)
+    res.save(result_name)
+
+
+Main()
